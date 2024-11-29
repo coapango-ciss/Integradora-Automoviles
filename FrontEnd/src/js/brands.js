@@ -21,7 +21,7 @@ const findAllBrands = async () =>{
     })
     .then(response => response.json())
     .then(response => {
-        brands = response.data;
+        brands = response.data.reverse();
         console.log(brands);
     })
     .catch(console.log);

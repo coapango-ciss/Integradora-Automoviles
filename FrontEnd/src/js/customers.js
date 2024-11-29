@@ -16,7 +16,7 @@ const findAllCustomers = async () =>{
     })
     .then(response => response.json())
     .then(response => {
-        customers = response.data;
+        customers = response.data.reverse();
         console.log(customers);
     })
     .catch(console.log);

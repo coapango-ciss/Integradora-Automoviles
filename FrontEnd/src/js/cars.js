@@ -43,10 +43,7 @@ const findAllCars = async () =>{
     })
     .then(response => response.json())
     .then(response => {
-        response = response.data;
-        response.forEach((item) => {
-            cars.push(item);
-        });
+        cars = response.data.reverse();
         console.log(cars);
     })
     .catch(console.log);

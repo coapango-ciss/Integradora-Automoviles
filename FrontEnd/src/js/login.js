@@ -22,7 +22,7 @@ const login = async () =>{
         console.log(response);
         if(response.data != null) {
             localStorage.setItem("auth_token",response.data);
-            window.location.href = "/view/cars.html";
+            window.location.href = "../view/cars.html";
         }
         console.log(`auth_token: ${localStorage.getItem("auth_token")}`);
     }).catch(console.log)

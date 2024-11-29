@@ -20,7 +20,7 @@ const findAllServices = async () =>{
     })
     .then(response => response.json())
     .then(response => {
-        services = response.data;
+        services = response.data.reverse();
         console.log(services);
     })
     .catch(console.log);

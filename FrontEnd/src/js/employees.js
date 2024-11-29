@@ -20,7 +20,7 @@ const findAllEmployees = async () =>{
     })
     .then(response => response.json())
     .then(response => {
-        employees = response.data;
+        employees = response.data.reverse();
         console.log(employees);
     })
     .catch(console.log);
