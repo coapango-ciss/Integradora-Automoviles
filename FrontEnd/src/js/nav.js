@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Resaltar el enlace activo
         const currentPath = window.location.pathname;
         document.querySelectorAll(".nav-item a").forEach(link => {
-            console.log(currentPath);
             if (link.getAttribute("href") === currentPath) {
                 link.classList.add("active");
             }

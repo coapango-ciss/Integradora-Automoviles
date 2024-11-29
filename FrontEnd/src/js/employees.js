@@ -21,7 +21,6 @@ const findAllEmployees = async () =>{
     .then(response => response.json())
     .then(response => {
         employees = response.data.reverse();
-        console.log(employees);
     })
     .catch(console.log);
 }
@@ -34,7 +33,6 @@ const save = async () =>{
         lastname: document.getElementById('lastname').value,
         username: document.getElementById('username').value
     }
-    console.log(employee);
     await fetch(`${URL}/automoviles/employee`,{
         method: 'POST',
         headers:{
@@ -45,7 +43,6 @@ const save = async () =>{
         body: JSON.stringify(employee) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         employee = {};
         form.reset();
         await loadContent();
@@ -63,7 +60,6 @@ const findById = async id =>{
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         employee = response.data;
     })
     .catch(console.log);
@@ -87,7 +83,6 @@ const update = async () =>{
         body: JSON.stringify(updated) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         employee = {};
         form.reset();
         await loadContent();
@@ -104,7 +99,6 @@ const removeEmployee = async () =>{
         }
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         await loadContent();
     }).catch(console.log)
 }

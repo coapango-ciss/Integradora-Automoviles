@@ -21,7 +21,6 @@ const findAllServices = async () =>{
     .then(response => response.json())
     .then(response => {
         services = response.data.reverse();
-        console.log(services);
     })
     .catch(console.log);
 }
@@ -43,7 +42,6 @@ const save = async () =>{
         body: JSON.stringify(service) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         service = {};
         form.reset();
         await loadContent();
@@ -61,7 +59,6 @@ const findById = async id =>{
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         service = response.data;
     })
     .catch(console.log);
@@ -84,7 +81,6 @@ const update = async () =>{
         body: JSON.stringify(updated) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         service = {};
         form.reset();
         await loadContent();
@@ -101,7 +97,6 @@ const removeService = async () =>{
         }
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         await loadContent();
     }).catch(console.log)
 }

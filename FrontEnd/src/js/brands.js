@@ -22,7 +22,6 @@ const findAllBrands = async () =>{
     .then(response => response.json())
     .then(response => {
         brands = response.data.reverse();
-        console.log(brands);
     })
     .catch(console.log);
 }
@@ -42,7 +41,6 @@ const save = async () =>{
         body: JSON.stringify(brand) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         brand = {};
         form.reset();
         await loadContent();
@@ -60,11 +58,9 @@ const findById = async id =>{
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         brand = response.data;
     })
     .catch(console.log);
-    console.log(brand.id);
 }
 
 const update = async () =>{
@@ -82,7 +78,6 @@ const update = async () =>{
         body: JSON.stringify(updated) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         brand = {};
         form.reset();
         await loadContent();
@@ -99,7 +94,6 @@ const removeBrand = async () =>{
         }
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         await loadContent();
     }).catch(console.log)
 }

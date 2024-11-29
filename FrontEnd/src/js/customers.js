@@ -17,7 +17,6 @@ const findAllCustomers = async () =>{
     .then(response => response.json())
     .then(response => {
         customers = response.data.reverse();
-        console.log(customers);
     })
     .catch(console.log);
 }
@@ -41,7 +40,6 @@ const save = async () =>{
         body: JSON.stringify(customer) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         customer = {};
         form.reset();
         await loadTable();
@@ -59,7 +57,6 @@ const findById = async id =>{
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         customer = response.data;
     })
     .catch(console.log);
@@ -84,7 +81,6 @@ const update = async () =>{
         body: JSON.stringify(updated) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         customer = {};
         form.reset();
         await loadTable();
@@ -101,7 +97,6 @@ const removeCustomer = async () =>{
         }
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         await loadTable();
     }).catch(console.log)
 }

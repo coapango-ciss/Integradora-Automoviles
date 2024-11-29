@@ -26,7 +26,6 @@ const findAllBrands = async () =>{
     .then(response => response.json())
     .then(response => {
         brands = response.data;
-        console.log(brands);
     })
     .catch(console.log);
 }
@@ -44,7 +43,6 @@ const findAllCars = async () =>{
     .then(response => response.json())
     .then(response => {
         cars = response.data.reverse();
-        console.log(cars);
     })
     .catch(console.log);
 }
@@ -59,7 +57,6 @@ const save = async () =>{
         color: document.getElementById('color').value,
         price: document.getElementById('price').value
     }
-    console.log(car);
     await fetch(`${URL}/automoviles/car`,{
         method: 'POST',
         headers:{
@@ -70,7 +67,6 @@ const save = async () =>{
         body: JSON.stringify(car) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         car = {};
         form.reset();
         await loadContent();
@@ -88,7 +84,6 @@ const findById = async id =>{
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         car = response.data;
     })
     .catch(console.log);
@@ -105,7 +100,6 @@ const update = async () =>{
         color: document.getElementById('u_color').value,
         price: document.getElementById('u_price').value
     }
-    console.log(updated);
     await fetch(`${URL}/automoviles/car/${car.id}`,{
         method: 'PUT',
         headers:{
@@ -116,7 +110,6 @@ const update = async () =>{
         body: JSON.stringify(updated) 
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         car = {};
         form.reset();
         await loadContent();
@@ -133,7 +126,6 @@ const removeCar = async () =>{
         }
     })
     .then(response => response.json()).then(async response => {
-        console.log(response);
         await loadContent();
     }).catch(console.log)
 }
@@ -196,7 +188,6 @@ const loadData = async flag =>{
 const setDataOnForm = async id =>{
     await findById(id);
     await loadData(false);
-    console.log(car);
     document.getElementById("u_brands").value=car.brand.id;
     document.getElementById("u_model").value= car.model;
     document.getElementById("u_color").value= car.color;
