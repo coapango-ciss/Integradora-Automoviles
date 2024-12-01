@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados</title>
+    <title>Automoviles</title>
     <link href="../css/bootstap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
@@ -17,7 +17,7 @@
     <main class="m-5">
         <section class="d-flex align-items-center">
             <h3 class="m-0">Gestion de Automoviles</h3>
-            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal" onclick="loadData(true)">Nuevo registro</button>
+            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal" id="btnAddCar">Nuevo registro</button>
         </section>
         <hr>
         <section>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="save()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="update()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="row g-3">
                         <div class="col-12"><p>¿Está seguro de que quiere realizar esta operacion? <span class="fw-bold">Esta accion es irreversible</span></p></div>
                         <div class="col-12">
-                            <button type="button" data-bs-dismiss="modal" onclick="removeCar()" class="btn btn-outline-danger">Eliminar</button>
+                            <button type="button" data-bs-dismiss="modal" id="confirmDeleteCar" class="btn btn-outline-danger">Eliminar</button>
                             <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary ms-2">Cancelar</button>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
    
     <script src="../js/nav.js"></script>
     <script src="../js/session.js"></script>
-    <script src="../js/cars.js"></script>
+    <script src="../js/cars.js" type="module"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>
