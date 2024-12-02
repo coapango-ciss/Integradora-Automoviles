@@ -1,7 +1,7 @@
 import { findAllBrands } from "./services/brandService.js";
 import { deleteCar, findAllCars, findCarById, saveCar, updateCar } from "./services/carService.js";
+import { loadSelectData } from "./utils/loadSelect.js";
 
-let brands = [];
 let cars = [];
 let car = {};
 let updated = {};
@@ -12,15 +12,6 @@ let currentPage = 1;
 
 
 /* ----- Peticiones ----- */
-
-async function getAllBrands() {
-    try {
-        brands = await findAllBrands();
-    } catch (error) {
-        console.error("Error al obtener las marcas:", error);
-    }
-}
-
 const getAllCars = async () =>{
     try{
         cars = await findAllCars();
@@ -134,19 +125,10 @@ function renderPagination() {
     }
 }
 
-const loadData = async flag =>{
-    await getAllBrands();
-    let select = document.getElementById(flag ? 'brands' : 'u_brands' );  
-    let content = '';
-    brands.forEach(item => {
-        content += `<option value="${item.id}">${item.name}</option>`; 
-    });
-    select.innerHTML = content;
-}
 
 const setDataOnForm = async id =>{
     await getCarById(id);
-    await loadData(false);
+    await loadSelectData(findAllBrands,"brands",false);
     document.getElementById("u_brands").value=car.brand.id;
     document.getElementById("u_model").value= car.model;
     document.getElementById("u_color").value= car.color;
@@ -175,5 +157,5 @@ const loadContent = async () => {
     confirmDeleteCar.addEventListener('click', ()=>{
         removeCar(car.id)
     });
-    btnAddCar.addEventListener('click',loadData(true));
+    btnAddCar.addEventListener('click',loadSelectData(findAllBrands,"brands",true));
 })()
