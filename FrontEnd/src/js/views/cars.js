@@ -2,16 +2,12 @@ import { findAllBrands } from "../services/brandService.js";
 import { deleteCar, findAllCars, findCarById, saveCar, updateCar } from "../services/carService.js";
 import { loadSelectData } from "../utils/loadSelect.js";
 
-let cars = [];
 let car = {};
+let cars = [];
 let updated = {};
-
-//Paginación
 const rowsPerPage = 5;
 let currentPage = 1;
 
-
-/* ----- CRUD ----- */
 const getAllCars = async () =>{
     try{
         cars = await findAllCars();
