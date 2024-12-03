@@ -10,3 +10,39 @@ export async function findAllBrands() {
         throw error;
     }
 }
+
+export async function findBrandById(id) {
+    try {
+        return await request(`${BASE_ENDPOINT}/${id}`, "GET",null);  
+    } catch (error) {
+        console.error("Error al cargar marca:", error);
+        throw error;
+    }
+}
+
+export async function saveBrand(car) {
+    try {
+        return await request(BASE_ENDPOINT, "POST",car);  
+    } catch (error) {
+        console.error("Error al guardar la marca:", error);
+        throw error;
+    }
+}
+
+export async function updateBrand(id,car) {
+    try {
+        return await request(`${BASE_ENDPOINT}/${id}`, "PUT",car);  
+    } catch (error) {
+        console.error("Error al actualizar los datos:", error);
+        throw error;
+    }
+}
+
+export async function deleteBrand(id) {
+    try {
+        return await request(`${BASE_ENDPOINT}/${id}`, "DELETE",null);  
+    } catch (error) {
+        console.error("Error al eliminar el registro:", error);
+        throw error;
+    }
+}

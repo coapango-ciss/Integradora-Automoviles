@@ -13,7 +13,7 @@
     <main class="m-5">
         <section class="d-flex align-items-center">
             <h3 class="m-0">Gestion de Marcas</h3>
-            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal">Nuevo registro</button>
+            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal" id="buttonAddBrand">Nuevo registro</button>
         </section>
         <hr>
         <section>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="save()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="update()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -91,7 +91,7 @@
                     <div class="row g-3">
                         <div class="col-12"><p>¿Está seguro de que quiere realizar esta operacion? <span class="fw-bold">Esta accion es irreversible</span></p></div>
                         <div class="col-12">
-                            <button type="button" data-bs-dismiss="modal" onclick="removeBrand()" class="btn btn-outline-danger">Eliminar</button>
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-outline-danger" id="confirmDeleteBrand">Eliminar</button>
                             <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary ms-2">Cancelar</button>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
    
     <script src="../js/nav.js"></script>
     <script src="../js/session.js"></script>
-    <script src="../js/brands.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>    
+    <script src="../js/views/brands.js" type="module"></script>
 </body>
 </html>

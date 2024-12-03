@@ -62,7 +62,7 @@ const removeCar = async (id) =>{
 }
 
 
-/* ----- Presentación de datos ----- */
+
 
 const loadTable = async (page) => {
     await getAllCars();
