@@ -20,7 +20,7 @@ const getBrandById = async (id) =>{
     try{
         brand = await findBrandById(id);
     }catch(error){
-        console.log("Error al obtener el automovil");
+        console.log("Error al obtener la marca");
     }
 }
 

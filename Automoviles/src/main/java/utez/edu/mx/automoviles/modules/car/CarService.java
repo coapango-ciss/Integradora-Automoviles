@@ -69,6 +69,7 @@ public class CarService {
                 Date fecha = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", new Locale("es-MX"));
                 car.setRegisterDate(sdf.format(fecha));
+                car.setStatus(false);
                 carRepository.save(car);
                 return customResponseEntity.getOkResponse("Registro exitoso", "CREATED", 201, null);
             } catch (Exception e){

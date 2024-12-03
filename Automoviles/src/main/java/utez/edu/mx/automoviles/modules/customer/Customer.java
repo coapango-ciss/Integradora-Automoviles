@@ -34,7 +34,7 @@ public class Customer {
 
     /* Relaciones */
     @ManyToOne
-    @JoinColumn(name = "id_employee", nullable = false)
+    @JoinColumn(name = "id_employee")
     private Employee employee;
 
     @OneToMany(mappedBy = "customer")

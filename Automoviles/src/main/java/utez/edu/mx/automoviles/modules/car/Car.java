@@ -29,6 +29,9 @@ public class Car {
     @Column(name = "price", nullable = false)
     private double price;
 
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
     @Column(name = "sell_date")
     private String sellDate;
 
@@ -50,42 +53,47 @@ public class Car {
     private List<Service> services;
 
     /* Constructores */
-    public Car() {}
+    public Car() {
+    }
 
-    public Car(String model, String color, String registerDate, double price, String sellDate) {
+    public Car(String model, String color, String registerDate, double price, boolean status, String sellDate) {
         this.model = model;
         this.color = color;
         this.registerDate = registerDate;
         this.price = price;
+        this.status = status;
         this.sellDate = sellDate;
     }
 
-    public Car(long id, String model, String color, String registerDate, double price, String sellDate) {
+    public Car(long id, String model, String color, String registerDate, double price, boolean status, String sellDate) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.registerDate = registerDate;
         this.price = price;
+        this.status = status;
         this.sellDate = sellDate;
     }
 
-    public Car(String model, String color, String registerDate, double price, String sellDate, Brand brand, Customer customer, List<Service> services) {
+    public Car(String model, String color, String registerDate, double price, boolean status, String sellDate, Brand brand, Customer customer, List<Service> services) {
         this.model = model;
         this.color = color;
         this.registerDate = registerDate;
         this.price = price;
+        this.status = status;
         this.sellDate = sellDate;
         this.brand = brand;
         this.customer = customer;
         this.services = services;
     }
 
-    public Car(long id, String model, String color, String registerDate, double price, String sellDate, Brand brand, Customer customer, List<Service> services) {
+    public Car(long id, String model, String color, String registerDate, double price, boolean status, String sellDate, Brand brand, Customer customer, List<Service> services) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.registerDate = registerDate;
         this.price = price;
+        this.status = status;
         this.sellDate = sellDate;
         this.brand = brand;
         this.customer = customer;
@@ -130,6 +138,14 @@ public class Car {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getSellDate() {
