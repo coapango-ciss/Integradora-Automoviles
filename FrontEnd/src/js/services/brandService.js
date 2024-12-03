@@ -20,18 +20,18 @@ export async function findBrandById(id) {
     }
 }
 
-export async function saveBrand(car) {
+export async function saveBrand(brand) {
     try {
-        return await request(BASE_ENDPOINT, "POST",car);  
+        return await request(BASE_ENDPOINT, "POST",brand);  
     } catch (error) {
         console.error("Error al guardar la marca:", error);
         throw error;
     }
 }
 
-export async function updateBrand(id,car) {
+export async function updateBrand(id,brand) {
     try {
-        return await request(`${BASE_ENDPOINT}/${id}`, "PUT",car);  
+        return await request(`${BASE_ENDPOINT}/${id}`, "PUT",brand);  
     } catch (error) {
         console.error("Error al actualizar los datos:", error);
         throw error;

@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="save()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-outline-success ms-2" type="button" data-bs-dismiss="modal" onclick="update()">Registrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -109,7 +109,7 @@
                     <div class="row g-3">
                         <div class="col-12"><p>¿Está seguro de que quiere realizar esta operacion? <span class="fw-bold">Esta accion es irreversible</span></p></div>
                         <div class="col-12">
-                            <button type="button" data-bs-dismiss="modal" onclick="removeService()" class="btn btn-outline-danger">Eliminar</button>
+                            <button type="button" data-bs-dismiss="modal" id="confirmDeleteService" class="btn btn-outline-danger">Eliminar</button>
                             <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary ms-2">Cancelar</button>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
    
     <script src="../js/nav.js"></script>
     <script src="../js/session.js"></script>
-    <script src="../js/services.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>    
+    <script src="../js/views/services.js" type="module"></script>
 </body>
 </html>
