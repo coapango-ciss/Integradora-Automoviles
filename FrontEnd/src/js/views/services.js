@@ -46,7 +46,7 @@ const updateServiceDetails = async () =>{
         description: document.getElementById('u_description').value
     }
     await updateService(service.id,updated);
-    service = {};
+    updated = {};
     form.reset();
     await loadContent();
 }

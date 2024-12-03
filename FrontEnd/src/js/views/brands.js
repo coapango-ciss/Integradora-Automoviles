@@ -42,7 +42,7 @@ const updateBrandDetails = async () =>{
         name: document.getElementById('u_name').value
     }
     await updateBrand(brand.id,updated);
-    brand = {};
+    updated = {};
     form.reset();
     await loadContent();
 }

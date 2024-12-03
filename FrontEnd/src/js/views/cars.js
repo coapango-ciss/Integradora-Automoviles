@@ -51,7 +51,7 @@ const updateCarDetails = async () =>{
         price: document.getElementById('u_price').value
     }
     await updateCar(car.id,updated);
-    car = {};
+    updated = {};
     form.reset();
     await loadContent();
 }

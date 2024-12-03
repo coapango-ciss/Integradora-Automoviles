@@ -47,7 +47,7 @@ const updateEmployeeDetails = async () =>{
         username: document.getElementById('u_username').value
     }
     await updateEmployee(employee.id,updated);
-    employee = {};
+    updated = {};
     form.reset();
     await loadContent();
 }
