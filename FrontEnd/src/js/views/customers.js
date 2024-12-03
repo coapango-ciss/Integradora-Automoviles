@@ -3,7 +3,7 @@ import { findAllCustomers, findCustomerById, saveCustomer, updateCustomer,delete
 let Customer = {};
 let Customers = [];
 let updated = {};
-const rowsPerPage = 5;
+const rowsPerPage = 8;
 let currentPage = 1;
 
 

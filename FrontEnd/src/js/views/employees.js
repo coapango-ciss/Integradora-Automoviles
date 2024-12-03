@@ -3,7 +3,7 @@ import { findAllEmployees, findEmployeeById, saveEmployee, updateEmployee,delete
 let employee = {};
 let employees = [];
 let updated = {};
-const rowsPerPage = 5;
+const rowsPerPage = 8;
 let currentPage = 1;
 
 

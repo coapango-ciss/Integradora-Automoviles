@@ -3,7 +3,7 @@ import { findAllBrands, findBrandById, saveBrand, updateBrand,deleteBrand } from
 let brand = {};
 let brands = [];
 let updated = {};
-const rowsPerPage = 5;
+const rowsPerPage = 8;
 let currentPage = 1;
 
 
