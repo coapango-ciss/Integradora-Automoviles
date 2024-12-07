@@ -1,4 +1,4 @@
-import { findAllBrands } from "../services/brandService.js";
+import { saveBrand, findAllBrands } from "../services/brandService.js";
 import { deleteCar, findAllCars, findCarById, saveCar, updateCar } from "../services/carService.js";
 import { loadSelectData } from "../utils/loadSelect.js";
 
@@ -38,6 +38,15 @@ const createCar = async () =>{
     car = {};
     form.reset();
     await loadContent();
+}
+
+const createBrand = async () =>{
+    let form = document.getElementById('saveBrandForm');
+    const brand = {
+        name: document.getElementById('name').value
+    }
+    await saveBrand(brand);
+    form.reset();
 }
 
 const updateCarDetails = async () =>{
@@ -141,10 +150,17 @@ const loadContent = async () => {
     const btnAddCar = document.getElementById("btnAddCar");
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");
+    const saveBrandForm = document.getElementById("saveBrandForm");
     const confirmDeleteCar = document.getElementById("confirmDeleteCar");
     saveForm.addEventListener('submit', (e) =>{
         e.preventDefault();
         createCar();
+    })
+    saveBrandForm.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        await createBrand();    
+        await loadSelectData(findAllBrands,"brands",true);
+        
     })
     updateForm.addEventListener('submit', (e) =>{
         e.preventDefault();

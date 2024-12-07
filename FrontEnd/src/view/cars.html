@@ -53,11 +53,14 @@
                     <h4>Nuevo registro</h4>
                     <hr>
                     <form class="row g-3" id="saveForm">
-                        <div class="col-12">
-                            <label for="brands"><small>Marca</small></label>
-                            <select name="brands" id="brands" class="form-select">
-                                
-                            </select>
+                        <div class="col-12 d-flex align-items-evnely">
+                            <div class="col-10">
+                                <label for="brands"><small>Marca</small></label>
+                                <select name="brands" id="brands" class="form-select"></select>
+                            </div>
+                            <div class="col-2 d-flex align-items-end justify-content-end">
+                                <button type="button" class="btn btn-outline-primary" id="addBrand" data-bs-target="#saveBrandModal" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" height="20px" width="20px" viewBox="0 -960 960 960" fill="currentcolor"><path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z"/></svg></button>
+                            </div>
                         </div>
                         <div class="col-12">
                             <label for="model"><small>Modelo</small></label>
@@ -82,6 +85,28 @@
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
                             <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de registro de nueva marca-->
+    <div class="modal fade" id="saveBrandModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="saveBrandModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Agregar Nueva Marca</h4>
+                    <hr>
+                    <form class="row g-3" id="saveBrandForm">
+                        <div class="col-12">
+                            <label for="name"><small>Nombre</small></label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
+                        <div class="col-12 text-end">
+                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" data-bs-target="#saveModal" data-bs-toggle="modal">Cerrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal" data-bs-target="#saveModal" data-bs-toggle="modal">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -132,6 +157,7 @@
             </div>
         </div>
     </div>
+   
     <!-- Modal de Eliminación-->
     <div class="modal fade" id="deleteModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
