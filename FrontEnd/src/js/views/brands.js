@@ -1,4 +1,5 @@
 import { findAllBrands, findBrandById, saveBrand, updateBrand,deleteBrand } from "../services/brandService.js";
+import { checkAuth } from "../utils/session.js";
 
 let brand = {};
 let brands = [];
@@ -119,6 +120,7 @@ const loadContent = async () => {
 };
 
 (async ()=>{
+    checkAuth();
     await loadContent();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");

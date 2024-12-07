@@ -1,4 +1,5 @@
 import { findAllServices, findServiceById, saveService, updateService,deleteService } from "../services/serviceService.js";
+import { checkAuth } from "../utils/session.js";
 
 let service = {};
 let services = [];
@@ -127,6 +128,7 @@ const loadContent = async () => {
 };
 
 (async ()=>{
+    checkAuth();
     await loadContent();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");

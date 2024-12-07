@@ -1,4 +1,5 @@
 import { findAllCustomers, findCustomerById, saveCustomer, updateCustomer,deleteCustomer } from "../services/CustomerService.js";
+import { checkAuth } from "../utils/session.js";
 
 let Customer = {};
 let Customers = [];
@@ -132,6 +133,7 @@ const loadContent = async () => {
 };
 
 (async ()=>{
+    checkAuth();
     await loadContent();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");

@@ -1,4 +1,5 @@
 import { findAllEmployees, findEmployeeById, saveEmployee, updateEmployee,deleteEmployee } from "../services/employeeService.js";
+import { checkAuth } from "../utils/session.js";
 
 let employee = {};
 let employees = [];
@@ -127,6 +128,7 @@ const loadContent = async () => {
 
 (async ()=>{
     await loadContent();
+    checkAuth();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");
     const confirmDeleteEmployee = document.getElementById("confirmDeleteEmployee");

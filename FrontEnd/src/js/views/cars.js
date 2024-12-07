@@ -1,6 +1,7 @@
 import { saveBrand, findAllBrands } from "../services/brandService.js";
 import { deleteCar, findAllCars, findCarById, saveCar, updateCar } from "../services/carService.js";
 import { loadSelectData } from "../utils/loadSelect.js";
+import { checkAuth } from "../utils/session.js";
 
 let car = {};
 let cars = [];
@@ -145,29 +146,35 @@ const loadContent = async () => {
     renderPagination();
 }
 
-(async ()=>{
-    await loadContent();
-    const btnAddCar = document.getElementById("btnAddCar");
-    const updateForm = document.getElementById("updateForm");
-    const saveForm = document.getElementById("saveForm");
-    const saveBrandForm = document.getElementById("saveBrandForm");
-    const confirmDeleteCar = document.getElementById("confirmDeleteCar");
-    saveForm.addEventListener('submit', (e) =>{
+function registerEventListeners() {
+    document.getElementById("saveForm").addEventListener('submit', async (e) => {
         e.preventDefault();
-        createCar();
-    })
-    saveBrandForm.addEventListener('submit', async (e) =>{
-        e.preventDefault();
-        await createBrand();    
-        await loadSelectData(findAllBrands,"brands",true);
-        
-    })
-    updateForm.addEventListener('submit', (e) =>{
-        e.preventDefault();
-        updateCarDetails();
-    })
-    confirmDeleteCar.addEventListener('click', ()=>{
-        removeCar(car.id)
+        await createCar();
     });
-    btnAddCar.addEventListener('click',loadSelectData(findAllBrands,"brands",true));
+
+    document.getElementById("saveBrandForm").addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await createBrand();
+        await loadSelectData(findAllBrands, "brands", true);
+    });
+
+    document.getElementById("updateForm").addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await updateCarDetails();
+    });
+
+    document.getElementById("confirmDeleteCar").addEventListener('click', async () => {
+        await removeCar(car.id);
+    });
+
+    document.getElementById("btnAddCar").addEventListener('click', async () => {
+        await loadSelectData(findAllBrands, "brands", true);
+    });
+}
+
+
+(async ()=>{
+    checkAuth();
+    await loadContent();
+    registerEventListeners();
 })()
