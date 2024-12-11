@@ -31,7 +31,7 @@ export const request = async (endpoint, method, body = null) => {
     }
 };
 
-export const requestCredentials = async (user ) => {
+export const requestCredentials = async (user) => {
     try {
         const options = {
             method: "POST",
@@ -47,7 +47,6 @@ export const requestCredentials = async (user ) => {
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-
         const json = await response.json();
         return json.data;
     } catch (error) {

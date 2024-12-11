@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automóviles Vendidos</title>
+    <title>Automoviles</title>
     <link href="../css/bootstap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+
 </head>
 
 <body>
@@ -13,8 +16,7 @@
 
     <main class="m-5">
         <section class="d-flex align-items-center">
-            <h3 class="m-0">Automoviles Vendidos</h3>
-            <button class="btn btn-success ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#saveModal" id="btnSellCar">Nueva venta</button>
+            <h3 class="m-0">Gestion de Automoviles</h3>
         </section>
         <hr>
         <section>
@@ -23,32 +25,39 @@
                     <thead>
                         <tr class="table-dark">
                             <th scope="col">#</th>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Automóvil</th>
-                            <th scope="col">Fecha de venta</th>
-                            <th scope="col">Precio Total</th> <!-- Aquí se muestra el precio total -->
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Precio</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody"></tbody>
+                    <tbody id="tbody" name="tbody">
+                    </tbody>
                 </table>
                 <nav>
-                    <ul class="pagination justify-content-center" id="pagination"></ul>
+                    <ul class="pagination justify-content-center" id="pagination">
+                    </ul>
                 </nav>
             </div>
         </section>
     </main>
 
-    <!--Modal de servicios-->
-    <div class="modal fade" id="addServicesModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addServicesModal" aria-hidden="true">
+    <!-- Modal de venta-->
+    <div class="modal fade" id="sellModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="sellModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Agregar Servicio</h4>
+                    <h4>Nueva venta</h4>
                     <hr>
-                    <form class="row g-3" id="addServicesForm">
-                        <div class="col-12" id="serviceChecklist">
-                            
+                    <form class="row g-3" id="sellForm">
+                        <div class="col-12 d-flex align-items-evnely">
+                            <div class="col-10">
+                                <label for="customer"><small>Cliente</small></label>
+                                <select name="customer" id="customer" class="form-select">
+                                    
+                                </select>
+                            </div>
                         </div>
                         <div class="col-12 text-end">
                             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
@@ -60,9 +69,7 @@
         </div>
     </div>
    
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/views/sold.js" type="module"></script>
-   
+    <script src="../js//views/selling.js" type="module"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>    
 </body>
-
 </html>

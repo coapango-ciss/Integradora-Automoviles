@@ -176,7 +176,7 @@ function registerEventListeners() {
 
 
 (async ()=>{
-    const requestedRoles = ["ROLE_ADMIN","ROLE_EMPLOYEE"];
+    const requestedRoles = ["ROLE_ADMIN"];
     checkAuth(requestedRoles);
     await loadContent();
     registerEventListeners();

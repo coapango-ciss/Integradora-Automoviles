@@ -1,4 +1,20 @@
 import { loadNavbar } from "./nav.js";
+import {requestCredentials} from "../services/api.js"
+
+export async function login (user){
+    let rol;
+    const credentials = await requestCredentials(user); 
+    if(credentials != null) {
+        const decoded = await decodeJWT();
+        rol = decoded.rol.toString();
+        localStorage.setItem("rol",rol);
+    }
+    if(rol === "ROLE_ADMIN"){
+        window.location.href = "./view/cars.html";
+    }else{
+        window.location.href = "./view/selling";
+    }
+}
 
 export function logout() {
     localStorage.removeItem("auth_token");
@@ -17,12 +33,12 @@ function decodeJWT() {
 }
 
 export async function checkAuth(requestedRoles) {
-    const decoded = await decodeJWT();
-    const rol = decoded.rol.toString();
+    const rol = localStorage.getItem("rol");
     if(requestedRoles.includes(rol)){
         await loadNavbar(rol);
     }else{
         alert("acceso denegado");
-        window.location.href = "../view/cars.html";
+        await logout();
+        window.location.href = "../index.html";
     }
 }
