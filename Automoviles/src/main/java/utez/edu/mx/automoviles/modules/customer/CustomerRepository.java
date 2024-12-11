@@ -7,7 +7,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-
     List<Customer> findAll();
     Customer findById(long id);
     Customer save(Customer customer);

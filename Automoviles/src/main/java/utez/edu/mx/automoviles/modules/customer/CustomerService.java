@@ -2,9 +2,13 @@ package utez.edu.mx.automoviles.modules.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utez.edu.mx.automoviles.modules.customer.DTO.CustomerDTO;
+import utez.edu.mx.automoviles.modules.employee.Employee;
+import utez.edu.mx.automoviles.modules.employee.EmployeeRepository;
 import utez.edu.mx.automoviles.utils.CustomResponseEntity;
 
 import java.sql.SQLException;
@@ -15,8 +19,13 @@ import java.util.List;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
+
     @Autowired
     private CustomResponseEntity customResponseEntity;
+
 
     public CustomerDTO transformToDTO(Customer customer) {
         return new CustomerDTO(
@@ -62,13 +71,20 @@ public class CustomerService {
 
     @Transactional(rollbackFor = {Exception.class, SQLException.class})
     public ResponseEntity<?> save(Customer customer){
-        try {
-            customerRepository.save(customer);
-            return customResponseEntity.getOkResponse("Registro exitoso", "CREATED", 201, null);
-        } catch (Exception e){
-            e.getMessage();
-            e.printStackTrace();
-            return customResponseEntity.get400Response();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Nombre del usuario autenticado
+        Employee employee = employeeRepository.findByUsername(username);
+        if (employee == null) return customResponseEntity.get404Response();
+        else {
+            try {
+                customer.setEmployee(employee);
+                customerRepository.save(customer);
+                return customResponseEntity.getOkResponse("Registro exitoso", "CREATED", 201, null);
+            } catch (Exception e){
+                e.getMessage();
+                e.printStackTrace();
+                return customResponseEntity.get400Response();
+            }
         }
     }
 
