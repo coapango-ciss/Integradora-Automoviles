@@ -11,7 +11,7 @@ const login = async () =>{
     credentials = await requestCredentials(user);
     if(credentials != null) {
         localStorage.setItem("auth_token",credentials);
-        window.location.href = "../view/cars.html";
+        window.location.href = "../src/view/cars.html";
     }
 }
 

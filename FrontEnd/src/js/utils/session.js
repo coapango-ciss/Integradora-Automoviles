@@ -1,12 +1,12 @@
 export function logout() {
     localStorage.removeItem("auth_token");
-    window.location.href = "../view/login.html";
+    window.location.href = "../index.html";
 }
 
 function decodeJWT() {
     const token = localStorage.getItem("auth_token");
     if(!token){
-        window.location.href = "../view/login.html";
+        window.location.href = "/FrontEnd/src/index.html";
         return;
     }
     const payloadBase64 = token.split('.')[1];
