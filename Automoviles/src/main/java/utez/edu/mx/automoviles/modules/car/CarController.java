@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import utez.edu.mx.automoviles.modules.customer.Customer;
+import utez.edu.mx.automoviles.modules.customer.DTO.CustomerDTO;
 
 @RestController
 @RequestMapping("/automoviles/car")
@@ -16,6 +18,12 @@ public class CarController {
     @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
     public ResponseEntity<?> findAll() {
         return carService.findAll();
+    }
+
+    @GetMapping("/sold/{status}")
+    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    public ResponseEntity<?> findByStatus(@PathVariable boolean status) {
+        return carService.findByStatus(status);
     }
 
     @GetMapping("/{id}")
@@ -34,6 +42,12 @@ public class CarController {
     @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
     public ResponseEntity<?> update(@PathVariable long id,@RequestBody Car car) {
         return carService.update(id,car);
+    }
+
+    @PutMapping("/sell/{id}")
+    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    public ResponseEntity<?> sell(@PathVariable long id, @RequestBody CustomerDTO customer) {
+        return carService.sell(id,customer);
     }
 
     @DeleteMapping("/{id}")

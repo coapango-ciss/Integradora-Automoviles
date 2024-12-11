@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automóviles - Gestión de Ventas</title>
+    <link href="../css/bootstap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main class="m-5">
+        <section class="d-flex align-items-center">
+            <h3 class="m-0">Gestión de Ventas</h3>
+            <button class="btn btn-success ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#saveModal" id="btnSellCar">Nueva venta</button>
+        </section>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Ventas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./cars.html">Gestión de Automóviles</a>
+            </li>
+        </ul>
+        <section>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">#</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Automóvil</th>
+                            <th scope="col">Fecha de venta</th>
+                            <th scope="col">Precio Total</th> <!-- Aquí se muestra el precio total -->
+                            <th scope="col" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination"></ul>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <!--Modal de servicios-->
+    <div class="modal fade" id="addServicesModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addServicesModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Agregar Servicio</h4>
+                    <hr>
+                    <form class="row g-3" id="addServicesForm">
+                        <div class="col-12">
+                            <label for="u_services"><small>Services</small></label>
+                            <select name="u_services" id="u_services" class="form-select">
+                                
+                            </select>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-outline-success ms-2" type="submit" data-bs-dismiss="modal">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/views/sales.js" type="module"></script>
+   
+</body>
+
+</html>

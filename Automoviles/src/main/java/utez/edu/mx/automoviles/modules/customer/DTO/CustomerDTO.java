@@ -1,7 +1,5 @@
 package utez.edu.mx.automoviles.modules.customer.DTO;
 
-import utez.edu.mx.automoviles.modules.customer.Customer;
-import utez.edu.mx.automoviles.modules.employee.DTO.EmployeeDTO;
 import utez.edu.mx.automoviles.modules.employee.Employee;
 
 public class CustomerDTO {

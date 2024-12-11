@@ -8,22 +8,43 @@ import java.util.List;
 
 public class CarDTO {
     private long id;
-    private String code, model, color, registerDate;
+    private String model, color, registerDate, sellDate;
     private double price;
     private Brand brand ;
+    private boolean status;
     private Customer customer;
     private List<Service> services;
 
     public CarDTO() {
     }
 
-    public CarDTO(long id, String model, String color, String registerDate, double price, Brand brand, Customer customer, List<Service> services) {
+    public CarDTO(long id, String model, String color, String registerDate, String sellDate, double price, Brand brand, boolean status, Customer customer, List<Service> services) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.registerDate = registerDate;
+        this.sellDate = sellDate;
         this.price = price;
         this.brand = brand;
+        this.status = status;
+        this.customer = customer;
+        this.services = services;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getSellDate() {
+        return sellDate;
+    }
+
+    public void setSellDate(String sellDate) {
+        this.sellDate = sellDate;
     }
 
     public long getId() {

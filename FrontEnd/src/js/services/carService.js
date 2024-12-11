@@ -11,6 +11,16 @@ export async function findAllCars() {
     }
 }
 
+export async function findCarByStatus(status) {
+    try {
+        return await request(`${BASE_ENDPOINT}/sold/${status}`, "GET",null);  
+    } catch (error) {
+        console.error("Error al cargar los automoviles", error);
+        throw error;
+    }
+}
+
+
 export async function findCarById(id) {
     try {
         return await request(`${BASE_ENDPOINT}/${id}`, "GET",null);  
@@ -25,6 +35,15 @@ export async function saveCar(car) {
         return await request(BASE_ENDPOINT, "POST",car);  
     } catch (error) {
         console.error("Error al guardar el automovil:", error);
+        throw error;
+    }
+}
+
+export async function sellCar(id, customer) {
+    try{
+        return await request(`${BASE_ENDPOINT}/sell/${id}`, "PUT", customer);
+    }catch(error){
+        console.error("Error al realizar la venta");
         throw error;
     }
 }
