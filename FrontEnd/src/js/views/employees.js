@@ -127,8 +127,9 @@ const loadContent = async () => {
 };
 
 (async ()=>{
+    const requestedRoles = ["ROLE_ADMIN"];
+    checkAuth(requestedRoles);
     await loadContent();
-    checkAuth();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");
     const confirmDeleteEmployee = document.getElementById("confirmDeleteEmployee");

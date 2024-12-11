@@ -120,7 +120,8 @@ const loadContent = async () => {
 };
 
 (async ()=>{
-    checkAuth();
+    const requestedRoles = ["ROLE_ADMIN"];
+    checkAuth(requestedRoles);
     await loadContent();
     const updateForm = document.getElementById("updateForm");
     const saveForm = document.getElementById("saveForm");
