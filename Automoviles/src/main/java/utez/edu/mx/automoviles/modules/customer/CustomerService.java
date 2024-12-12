@@ -26,6 +26,9 @@ public class CustomerService {
     @Autowired
     private CustomResponseEntity customResponseEntity;
 
+    Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = currentAuthentication.getName(); // Nombre del usuario autenticado
+    Employee currentEmployee = employeeRepository.findByUsername(username);
 
     public CustomerDTO transformToDTO(Customer customer) {
         return new CustomerDTO(
@@ -54,6 +57,21 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
+    public ResponseEntity<?> findMyClients(){
+        List<CustomerDTO> customers = new ArrayList<>();
+        String message = "";
+        if (customerRepository.findByEmployee(currentEmployee.getId()) == null){
+            message = "Aun no tienes clientes";
+        }else{
+            for(Customer customer : customerRepository.findByEmployee(currentEmployee.getId())){
+                customers.add(transformToDTO(customer));
+            }
+            message = "Operación exitosa";
+        }
+        return customResponseEntity.getOkResponse(message,"OK",200,customers);
+    }
+
+    @Transactional(readOnly = true)
     public ResponseEntity<?> findById(long id){
         CustomerDTO found;
         if (customerRepository.findById(id) == null) return customResponseEntity.get404Response();
@@ -71,22 +89,17 @@ public class CustomerService {
 
     @Transactional(rollbackFor = {Exception.class, SQLException.class})
     public ResponseEntity<?> save(Customer customer){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); // Nombre del usuario autenticado
-        Employee employee = employeeRepository.findByUsername(username);
-        if (employee == null) return customResponseEntity.get404Response();
-        else {
-            try {
-                customer.setEmployee(employee);
-                customerRepository.save(customer);
-                return customResponseEntity.getOkResponse("Registro exitoso", "CREATED", 201, null);
-            } catch (Exception e){
-                e.getMessage();
-                e.printStackTrace();
-                return customResponseEntity.get400Response();
-            }
+        try {
+            customer.setEmployee(currentEmployee);
+            customerRepository.save(customer);
+            return customResponseEntity.getOkResponse("Registro exitoso", "CREATED", 201, null);
+        } catch (Exception e){
+            e.getMessage();
+            e.printStackTrace();
+            return customResponseEntity.get400Response();
         }
     }
+
 
     @Transactional(rollbackFor = {Exception.class, SQLException.class})
     public ResponseEntity<?> update(long id,Customer customer){

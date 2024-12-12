@@ -16,8 +16,8 @@
 
     <main class="m-5">
         <section class="d-flex align-items-center">
-            <h3 class="m-0">Gestion de Automoviles</h3>
-            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal" id="btnAddCar">Nuevo registro</button>
+            <h3 class="m-0">Catálogo de Automoviles</h3>
+            <button class="btn btn-success ms-auto" type="button" data-bs-target="#saveModal" data-bs-toggle="modal" id="btnAddCar">Registrar Automovil</button>
         </section>
         <hr>
         <section>
@@ -46,12 +46,11 @@
         </section>
     </main>
 
-    <!-- Modal de registro-->
     <div class="modal fade" id="saveModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="saveModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Nuevo registro</h4>
+                    <h4>Nuevo Automovvil</h4>
                     <hr>
                     <form class="row g-3" id="saveForm">
                         <div class="col-12 d-flex align-items-evnely">
@@ -93,12 +92,11 @@
         </div>
     </div>
 
-    <!-- Modal de registro de nueva marca-->
     <div class="modal fade" id="saveBrandModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="saveBrandModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Agregar Nueva Marca</h4>
+                    <h4>Registrar Marca</h4>
                     <hr>
                     <form class="row g-3" id="saveBrandForm">
                         <div class="col-12">
@@ -115,7 +113,6 @@
         </div>
     </div>
     
-    <!-- Modal de actualización-->
     <div class="modal fade" id="updateModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -159,7 +156,6 @@
         </div>
     </div>
    
-    <!-- Modal de Eliminación-->
     <div class="modal fade" id="deleteModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -178,7 +174,7 @@
         </div>
     </div>
    
-    <script src="../js//views/cars.js" type="module"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>    
+    <script src="../js/modules/cars.js" type="module"></script>
 </body>
 </html>

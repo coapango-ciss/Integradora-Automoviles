@@ -18,6 +18,12 @@ public class CustomerController {
         return customerService.findAll();
     }
 
+    @GetMapping("/mine")
+    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    public ResponseEntity<?> findMyClients() {
+        return customerService.findMyClients();
+    }
+
     @GetMapping("/{id}")
     @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
     public ResponseEntity<?> findById(@PathVariable long id) {

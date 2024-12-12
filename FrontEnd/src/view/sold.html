@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automóviles Vendidos</title>
+    <title>Ventas</title>
     <link href="../css/bootstap.min.css" rel="stylesheet">
 </head>
 
@@ -13,8 +13,7 @@
 
     <main class="m-5">
         <section class="d-flex align-items-center">
-            <h3 class="m-0">Automoviles Vendidos</h3>
-            <button class="btn btn-success ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#saveModal" id="btnSellCar">Nueva venta</button>
+            <h3 class="m-0">Mis Ventas</h3>
         </section>
         <hr>
         <section>
@@ -26,8 +25,8 @@
                             <th scope="col">Cliente</th>
                             <th scope="col">Automóvil</th>
                             <th scope="col">Fecha de venta</th>
-                            <th scope="col">Precio Total</th> <!-- Aquí se muestra el precio total -->
-                            <th scope="col" class="text-center">Acciones</th>
+                            <th scope="col">Precio Total</th> 
+                            <th scope="col" class="text-center">Añadir Servicios</th>
                         </tr>
                     </thead>
                     <tbody id="tbody"></tbody>
@@ -39,12 +38,11 @@
         </section>
     </main>
 
-    <!--Modal de servicios-->
     <div class="modal fade" id="addServicesModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addServicesModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Agregar Servicio</h4>
+                    <h4>Añadir Servicios</h4>
                     <hr>
                     <form class="row g-3" id="addServicesForm">
                         <div class="col-12" id="serviceChecklist">
@@ -61,7 +59,7 @@
     </div>
    
     <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/views/sold.js" type="module"></script>
+    <script src="../js/modules/sold.js" type="module"></script>
    
 </body>
 
