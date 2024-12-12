@@ -23,7 +23,8 @@ public class ServiceService {
                 service.getId(),
                 service.getCode(),
                 service.getName(),
-                service.getDescription()
+                service.getDescription(),
+                service.getPrice()
         );
     }
 

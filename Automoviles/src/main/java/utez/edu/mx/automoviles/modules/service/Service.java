@@ -25,6 +25,9 @@ public class Service {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
+    @Column(name = "price", nullable = false)
+    private double price;
+
     /* Relaciones */
     @ManyToMany(mappedBy = "services")
     @JsonIgnore
@@ -33,35 +36,37 @@ public class Service {
     /* Constructores */
     public Service() {}
 
-    public Service(String code, String name, String description) {
+    public Service(String code, String name, String description, double price) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.price = price;
     }
 
-    public Service(int id, String code, String name, String description) {
+    public Service(int id, String code, String name, String description, double price) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.description = description;
+        this.price = price;
     }
 
-    public Service(String code, String name, String description, List<Car> cars) {
+    public Service(String code, String name, String description, double price, List<Car> cars) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.cars = cars;
     }
 
-    public Service(int id, String code, String name, String description, List<Car> cars) {
+    public Service(int id, String code, String name, String description, double price, List<Car> cars) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.cars = cars;
     }
-
-    /* Getters & Setters */
 
     public int getId() {
         return id;
@@ -93,6 +98,14 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public List<Car> getCars() {
