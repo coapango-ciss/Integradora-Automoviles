@@ -11,6 +11,15 @@ export async function findAllCustomers() {
     }
 }
 
+export async function findMyCustomers() {
+    try {
+        return await request(`${BASE_ENDPOINT}/mine`, "GET");  
+    } catch (error) {
+        console.error("Error al cargar las marcas:", error);
+        throw error;
+    }
+}
+
 export async function findCustomerById(id) {
     try {
         return await request(`${BASE_ENDPOINT}/${id}`, "GET",null);  

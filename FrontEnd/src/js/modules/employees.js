@@ -58,9 +58,6 @@ const removeEmployee = async (id) =>{
     await loadContent();
 }
 
-
-
-
 const loadTable = async (page) => {
     await getAllEmployees();
     employees = employees.reverse();
@@ -116,9 +113,12 @@ function renderPagination() {
     }
 }
 
-const setDataOnForm = async id =>{
+const setDataOnForm = async (id) =>{
     await getEmployeeById(id);
     document.getElementById("u_name").value=employee.name;
+    document.getElementById("u_surname").value=employee.surname;
+    document.getElementById("u_lastname").value=employee.lastname;
+    document.getElementById("u_username").value=employee.username;
 }
 
 const loadContent = async () => {

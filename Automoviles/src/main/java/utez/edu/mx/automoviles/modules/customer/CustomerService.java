@@ -26,9 +26,6 @@ public class CustomerService {
     @Autowired
     private CustomResponseEntity customResponseEntity;
 
-    Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
-    String username = currentAuthentication.getName(); // Nombre del usuario autenticado
-    Employee currentEmployee = employeeRepository.findByUsername(username);
 
     public CustomerDTO transformToDTO(Customer customer) {
         return new CustomerDTO(
@@ -58,6 +55,10 @@ public class CustomerService {
 
     @Transactional(readOnly = true)
     public ResponseEntity<?> findMyClients(){
+        Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentAuthentication.getName(); // Nombre del usuario autenticado
+        Employee currentEmployee = employeeRepository.findByUsername(username);
+
         List<CustomerDTO> customers = new ArrayList<>();
         String message = "";
         if (customerRepository.findByEmployee(currentEmployee.getId()) == null){
@@ -89,6 +90,10 @@ public class CustomerService {
 
     @Transactional(rollbackFor = {Exception.class, SQLException.class})
     public ResponseEntity<?> save(Customer customer){
+        Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentAuthentication.getName(); // Nombre del usuario autenticado
+        Employee currentEmployee = employeeRepository.findByUsername(username);
+
         try {
             customer.setEmployee(currentEmployee);
             customerRepository.save(customer);
