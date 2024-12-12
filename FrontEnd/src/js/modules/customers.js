@@ -1,8 +1,9 @@
 import { findAllCustomers, findCustomerById, saveCustomer, updateCustomer,deleteCustomer } from "../services/CustomerService.js";
+import { findAllEmployees} from "../services/employeeService.js"
 import { checkAuth } from "../utils/session.js";
 
-let Customer = {};
-let Customers = [];
+let customer = {};
+let customers = [];
 let updated = {};
 const rowsPerPage = 8;
 let currentPage = 1;
@@ -10,8 +11,7 @@ let currentPage = 1;
 
 const getAllCustomers = async () =>{
     try{
-        Customers = await findAllCustomers();
-        console.log(Customers);
+        customers = await findAllCustomers();
     }catch(error){
         console.error("Error al obtener las marcas")
     }
@@ -19,25 +19,10 @@ const getAllCustomers = async () =>{
 
 const getCustomerById = async (id) =>{
     try{
-        Customer = await findCustomerById(id);
+        customer = await findCustomerById(id);
     }catch(error){
         console.log("Error al obtener la marca");
     }
-}
-
-const createCustomer = async () =>{
-    let form = document.getElementById('saveForm');
-    Customer = {
-        name: document.getElementById('name').value,
-        surname: document.getElementById('surname').value,
-        lastname: document.getElementById('lastname').value,   
-        email: document.getElementById('email').value,   
-        telephoneNumber: document.getElementById('telephoneNumber').value   
-    }
-    await saveCustomer(Customer);
-    Customer = {};
-    form.reset();
-    await loadContent();
 }
 
 const updateCustomerDetails = async () =>{
@@ -47,9 +32,12 @@ const updateCustomerDetails = async () =>{
         surname: document.getElementById('u_surname').value,
         lastname: document.getElementById('u_lastname').value,   
         email: document.getElementById('u_email').value,   
-        telephoneNumber: document.getElementById('u_telephoneNumber').value
+        telephoneNumber: document.getElementById('u_telephoneNumber').value,
+        employee: {
+            id:document.getElementById("u_employee").value
+        }
     }
-    await updateCustomer(Customer.id,updated);
+    await updateCustomer(customer.id,updated);
     updated = {};
     form.reset();
     await loadContent();
@@ -60,17 +48,15 @@ const removeCustomer = async (id) =>{
     await loadContent();
 }
 
-
-
-
 const loadTable = async (page) => {
     await getAllCustomers();
-    Customers = Customers.reverse();
+    customers = customers.reverse();
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-    const paginatedData = Customers.slice(start, end);
+    const paginatedData = customers.slice(start, end);
     let tbody = document.getElementById('tbody');
     let content = '';
+    console.log(customers);
     paginatedData.forEach((item, index) =>{
         content += `<tr>
                         <th scope="row">${start + index+1}</th>
@@ -88,21 +74,21 @@ const loadTable = async (page) => {
     tbody.addEventListener('click', (event) => {
         const editButton = event.target.closest('button[id^="editCustomer-"]');
         const deleButton = event.target.closest('button[id^="deleteCustomer-"]');
-        let CustomerId;
+        let customerId;
         if (editButton) {
-            CustomerId = editButton.id.split('-')[1];
-            setDataOnForm(CustomerId); 
+            customerId = editButton.id.split('-')[1];
+            setDataOnForm(customerId); 
         }
         if(deleButton){
-            CustomerId = deleButton.id.split('-')[1];
-            getCustomerById(CustomerId);
+            customerId = deleButton.id.split('-')[1];
+            getCustomerById(customerId);
         }
 
     });
 }
 
 function renderPagination() {
-    const totalPages = Math.ceil(Customers.length / rowsPerPage);
+    const totalPages = Math.ceil(customers.length / rowsPerPage);
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = '';
     for (let i = 1; i <= totalPages; i++) {
@@ -120,12 +106,16 @@ function renderPagination() {
 }
 
 const setDataOnForm = async id =>{
+    const data = await findAllEmployees();
+    const select = document.getElementById("u_employee");
+    let options = data.map(item => `<option value="${item.id}">${item.name} ${item.surname} ${item.lastname}</option>`).join('');  
+    select.innerHTML = options;
     await getCustomerById(id);
-    document.getElementById("u_name").value=Customer.name;
-    document.getElementById("u_surname").value=Customer.surname;
-    document.getElementById("u_lastname").value=Customer.lastname;
-    document.getElementById("u_email").value=Customer.email;
-    document.getElementById("u_telephoneNumber").value=Customer.telephoneNumber;
+    document.getElementById("u_name").value=customer.name;
+    document.getElementById("u_surname").value=customer.surname;
+    document.getElementById("u_lastname").value=customer.lastname;
+    document.getElementById("u_email").value=customer.email;
+    document.getElementById("u_telephoneNumber").value=customer.telephoneNumber;
 }
 
 const loadContent = async () => {
@@ -138,17 +128,12 @@ const loadContent = async () => {
     checkAuth(requestedRoles);
     await loadContent();
     const updateForm = document.getElementById("updateForm");
-    const saveForm = document.getElementById("saveForm");
     const confirmDeleteCustomer = document.getElementById("confirmDeleteCustomer");
-    saveForm.addEventListener('submit', (e) =>{
-        e.preventDefault();
-        createCustomer();
-    })
     updateForm.addEventListener('submit', (e) =>{
         e.preventDefault();
         updateCustomerDetails();
     })
     confirmDeleteCustomer.addEventListener('click', ()=>{
-        removeCustomer(Customer.id)
+        removeCustomer(customer.id)
     });
 })()

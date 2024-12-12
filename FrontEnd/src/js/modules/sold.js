@@ -1,9 +1,7 @@
-import { findCarById, findCarByStatus } from "../services/carService.js";
+import { findMySales } from "../services/carService.js";
 import { findAllServices } from "../services/serviceService.js";
-import { loadSelectData } from "../utils/loadSelect.js";
 import { checkAuth } from "../utils/session.js";
 
-let customer = {};
 let cars = [];
 let services = [];
 const rowsPerPage = 8;
@@ -11,7 +9,7 @@ let currentPage = 1;
 
 const getSoldCars = async () =>{
     try{
-        cars = await findCarByStatus(true);
+        cars = await findMySales(true);
     }catch(error){
         console.error("Error al obtener los automoviles")
     }
@@ -22,14 +20,6 @@ const getAllServices = async () =>{
         services = await findAllServices();
     } catch (error) {
         console.error("Error al obtener los servicios");
-    }
-}
-
-const getCarById = async (id) =>{
-    try{
-        car = await findCarById(id);
-    }catch(error){
-        console.log("Error al obtener el automovil");
     }
 }
 

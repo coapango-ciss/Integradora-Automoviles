@@ -15,7 +15,7 @@ public class CarController {
     private CarService carService;
 
     @GetMapping("")
-    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> findAll() {
         return carService.findAll();
     }
@@ -26,32 +26,38 @@ public class CarController {
         return carService.findSellingCars();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/sold")
     @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    public ResponseEntity<?> findMySales() {
+        return carService.findMySales();
+    }
+
+    @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> findById(@PathVariable long id) {
         return carService.findById(id);
     }
 
     @PostMapping("")
-    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody Car car) {
         return carService.save(car);
     }
 
     @PutMapping("/{id}")
-    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> update(@PathVariable long id,@RequestBody Car car) {
         return carService.update(id,car);
     }
 
     @PutMapping("/sell/{id}")
-    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    @Secured("ROLE_EMPLOYEE")
     public ResponseEntity<?> sell(@PathVariable long id, @RequestBody CustomerDTO customer) {
         return carService.sell(id,customer);
     }
 
     @DeleteMapping("/{id}")
-    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<?> delete(@PathVariable long id) {
         return carService.deleteById(id);
     }

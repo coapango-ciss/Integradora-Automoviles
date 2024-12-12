@@ -20,6 +20,14 @@ export async function findSellingCars() {
     }
 }
 
+export async function findMySales() {
+    try {
+        return await request(`${BASE_ENDPOINT}/sold`, "GET",null);  
+    } catch (error) {
+        console.error("Error al cargar los automoviles", error);
+        throw error;
+    }
+}
 
 export async function findCarById(id) {
     try {

@@ -2,12 +2,16 @@ package utez.edu.mx.automoviles.modules.car;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utez.edu.mx.automoviles.modules.car.DTO.CarDTO;
 import utez.edu.mx.automoviles.modules.customer.Customer;
 import utez.edu.mx.automoviles.modules.customer.CustomerRepository;
 import utez.edu.mx.automoviles.modules.customer.DTO.CustomerDTO;
+import utez.edu.mx.automoviles.modules.employee.Employee;
+import utez.edu.mx.automoviles.modules.employee.EmployeeRepository;
 import utez.edu.mx.automoviles.utils.CustomResponseEntity;
 
 import java.sql.SQLException;
@@ -25,6 +29,8 @@ public class CarService {
     private CustomResponseEntity customResponseEntity;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public CarDTO transformToDTO(Car car) {
         return new CarDTO(
@@ -67,6 +73,24 @@ public class CarService {
                 message = "Operación exitosa";
             }
             return customResponseEntity.getOkResponse(message,"OK",200,cars);
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> findMySales(){
+        Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentAuthentication.getName(); // Nombre del usuario autenticado
+        Employee currentEmployee = employeeRepository.findByUsername(username);
+
+        List<CarDTO> cars = new ArrayList<>();
+        String message = "";
+        if(carRepository.findSoldCarsByEmployee(currentEmployee.getId()).isEmpty()) message = "Aun no hay autos";
+        else{
+            for(Car car : carRepository.findSoldCarsByEmployee(currentEmployee.getId())){
+                cars.add(transformToDTO(car));
+            }
+            message = "Operación exitosa";
+        }
+        return customResponseEntity.getOkResponse(message,"OK",200,cars);
     }
 
     @Transactional(readOnly = true)
