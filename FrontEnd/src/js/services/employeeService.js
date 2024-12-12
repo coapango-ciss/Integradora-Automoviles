@@ -20,6 +20,15 @@ export async function findEmployeeById(id) {
     }
 }
 
+export async function findCurrentEmployee() {
+    try {
+        return await request(`${BASE_ENDPOINT}/current`, "GET",null);  
+    } catch (error) {
+        console.error("Error al cargar empleado:", error);
+        throw error;
+    }
+}
+
 export async function saveEmployee(employee) {
     try {
         return await request(BASE_ENDPOINT, "POST",employee);  

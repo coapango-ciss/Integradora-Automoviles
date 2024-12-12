@@ -24,6 +24,12 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    @GetMapping("/current")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    public ResponseEntity<?> findCurrentEmployee() {
+        return employeeService.findCurrentEmployee();
+    }
+
     @PostMapping("")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody Employee employee) {

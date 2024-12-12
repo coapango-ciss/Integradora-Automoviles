@@ -2,6 +2,8 @@ package utez.edu.mx.automoviles.modules.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utez.edu.mx.automoviles.modules.employee.DTO.EmployeeDTO;
@@ -57,6 +59,20 @@ public class EmployeeService {
                 e.printStackTrace();
                 return customResponseEntity.get400Response();
             }
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> findCurrentEmployee(){
+        Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentAuthentication.getName(); // Nombre del usuario autenticado
+        Employee currentEmployee = employeeRepository.findByUsername(username);
+        try {
+            return customResponseEntity.getOkResponse("Operacion exitosa", "OK",200,transformToDTO(currentEmployee));
+        } catch (Exception e){
+            e.getMessage();
+            e.printStackTrace();
+            return customResponseEntity.get400Response();
         }
     }
 

@@ -1,4 +1,5 @@
 import { logout } from "./session.js";
+import { findCurrentEmployee } from "../services/employeeService.js";
 
 export async function loadNavbar(rol) {
     let navbarFile = "navbar-default.html"; // Archivo predeterminado
@@ -11,14 +12,15 @@ export async function loadNavbar(rol) {
         alert("Acceso denegado");
         return; // Detener la carga si no hay acceso
     }
+    let currentRol = rol === "ROLE_ADMIN" ? "Administrador" : "Empleado";
+    let currentUser = await findCurrentEmployee();
+    console.log(currentUser);
 
-    // Cargar la barra de navegación
     fetch(navbarFile)
         .then(response => response.text())
         .then(data => {
             document.getElementById("navbar-placeholder").innerHTML = data;
 
-            // Resaltar el enlace activo
             const currentPath = window.location.pathname;
             document.querySelectorAll(".nav-item a").forEach(link => {
                 if (link.getAttribute("href") === currentPath) {
@@ -26,10 +28,15 @@ export async function loadNavbar(rol) {
                 }
             });
 
-            // Vincular el botón de logout
             const logoutBtn = document.getElementById("logoutBtn");
             if (logoutBtn) {
                 logoutBtn.addEventListener("click", logout);
             }
+
+            const sessionInfoCard = document.querySelector(".session-info");
+            if (sessionInfoCard) {
+                sessionInfoCard.innerHTML = `${currentUser.name} | ${currentRol}`;
+            }
+
         });
 }
