@@ -11,9 +11,9 @@ export async function findAllCars() {
     }
 }
 
-export async function findCarByStatus(status) {
+export async function findSellingCars() {
     try {
-        return await request(`${BASE_ENDPOINT}/sold/${status}`, "GET",null);  
+        return await request(`${BASE_ENDPOINT}/selling`, "GET",null);  
     } catch (error) {
         console.error("Error al cargar los automoviles", error);
         throw error;

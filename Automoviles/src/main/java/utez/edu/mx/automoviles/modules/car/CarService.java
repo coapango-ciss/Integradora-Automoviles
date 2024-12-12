@@ -56,12 +56,12 @@ public class CarService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<?> findByStatus(boolean status){
+    public ResponseEntity<?> findSellingCars(){
         List<CarDTO> cars = new ArrayList<>();
             String message = "";
-            if(carRepository.findByStatus(status).isEmpty()) message = "Aun no hay autos";
+            if(carRepository.findSellingCars().isEmpty()) message = "Aun no hay autos";
             else{
-                for(Car car : carRepository.findByStatus(status)){
+                for(Car car : carRepository.findSellingCars()){
                     cars.add(transformToDTO(car));
                 }
                 message = "Operación exitosa";

@@ -1,6 +1,5 @@
-import { findAllCustomers, findMyCustomers } from "../services/customerService.js";
-import { sellCar, findCarByStatus } from "../services/carService.js";
-import { loadSelectData } from "../utils/loadSelect.js";
+import { findMyCustomers } from "../services/customerService.js";
+import { sellCar, findSellingCars } from "../services/carService.js";
 import { checkAuth } from "../utils/session.js";
 
 let car = {};
@@ -12,7 +11,7 @@ let currentPage = 1;
 
 const getSellingCars = async () =>{
     try{
-        cars = await findCarByStatus(false);
+        cars = await findSellingCars();
         console.log(cars);
     }catch(error){
         console.error("Error al obtener los automoviles")

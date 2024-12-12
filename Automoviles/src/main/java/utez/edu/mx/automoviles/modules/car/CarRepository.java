@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long>{
     List<Car> findAll();
-    @Query(value = "SELECT * FROM car WHERE status = :status;", nativeQuery = true)
-    List<Car> findByStatus(@Param("status")boolean status);
+    @Query(value = "SELECT * FROM car WHERE status = false;", nativeQuery = true)
+    List<Car> findSellingCars();
     Car findById(long id);
     Car save(Car car);
     void deleteById(long id);

@@ -20,10 +20,10 @@ public class CarController {
         return carService.findAll();
     }
 
-    @GetMapping("/sold/{status}")
+    @GetMapping("/selling")
     @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
-    public ResponseEntity<?> findByStatus(@PathVariable boolean status) {
-        return carService.findByStatus(status);
+    public ResponseEntity<?> findSellingCars() {
+        return carService.findSellingCars();
     }
 
     @GetMapping("/{id}")
