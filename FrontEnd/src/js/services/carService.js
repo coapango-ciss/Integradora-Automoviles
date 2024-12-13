@@ -56,6 +56,15 @@ export async function sellCar(id, customer) {
     }
 }
 
+export async function addServiceToCar(carId,serviceIds) {
+    try {
+        return await request(`${BASE_ENDPOINT}/services/${carId}`, "PUT",serviceIds);  
+    } catch (error) {
+        console.error("Error al actualizar los Servicios:", error);
+        throw error;
+    }
+}
+
 export async function updateCar(id,car) {
     try {
         return await request(`${BASE_ENDPOINT}/${id}`, "PUT",car);  

@@ -12,6 +12,8 @@ import utez.edu.mx.automoviles.modules.customer.CustomerRepository;
 import utez.edu.mx.automoviles.modules.customer.DTO.CustomerDTO;
 import utez.edu.mx.automoviles.modules.employee.Employee;
 import utez.edu.mx.automoviles.modules.employee.EmployeeRepository;
+import utez.edu.mx.automoviles.modules.employee.EmployeeService;
+import utez.edu.mx.automoviles.modules.service.ServiceRepository;
 import utez.edu.mx.automoviles.utils.CustomResponseEntity;
 
 import java.sql.SQLException;
@@ -31,6 +33,8 @@ public class CarService {
     private CustomerRepository customerRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    ServiceRepository serviceRepository;
 
     public CarDTO transformToDTO(Car car) {
         return new CarDTO(
@@ -140,6 +144,35 @@ public class CarService {
                 e.printStackTrace();
                 return customResponseEntity.get400Response();
             }
+        }
+    }
+
+    @Transactional(rollbackFor = {Exception.class, SQLException.class})
+    public ResponseEntity<?> addServicesToCar(long carId, List<Integer> serviceIds) {
+        Car car = carRepository.findById(carId);
+        if (car == null) {
+            return customResponseEntity.get404Response();
+        }
+        try {
+            List<utez.edu.mx.automoviles.modules.service.Service> services = new ArrayList<>();
+            for (int serviceId : serviceIds) {
+                utez.edu.mx.automoviles.modules.service.Service service = serviceRepository.findById(serviceId);
+                if (service != null) {
+                    services.add(service);
+                }
+            }
+            car.setServices(services);
+            double  servicesPrice = 0;
+            for (utez.edu.mx.automoviles.modules.service.Service service : services) {
+                servicesPrice += service.getPrice();
+            }
+            car.setPrice(servicesPrice + car.getPrice());
+            carRepository.save(car);
+            return customResponseEntity.getOkResponse("Services added successfully", "OK", 200, null);
+        } catch (Exception e) {
+            e.getMessage();
+            e.printStackTrace();
+            return customResponseEntity.get400Response();
         }
     }
 

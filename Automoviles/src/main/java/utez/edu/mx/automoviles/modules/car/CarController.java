@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import utez.edu.mx.automoviles.modules.customer.Customer;
 import utez.edu.mx.automoviles.modules.customer.DTO.CustomerDTO;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/automoviles/car")
 @CrossOrigin(origins = {"*"}, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -54,6 +56,12 @@ public class CarController {
     @Secured("ROLE_EMPLOYEE")
     public ResponseEntity<?> sell(@PathVariable long id, @RequestBody CustomerDTO customer) {
         return carService.sell(id,customer);
+    }
+
+    @PutMapping("/services/{id}")
+    @Secured("ROLE_EMPLOYEE")
+    public ResponseEntity<?> addServicesToCar(@PathVariable long id,@RequestBody List<Integer> serviceIdS) {
+        return carService.addServicesToCar(id ,serviceIdS);
     }
 
     @DeleteMapping("/{id}")

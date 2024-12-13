@@ -1,8 +1,10 @@
 import { findMySales } from "../services/carService.js";
 import { findAllServices } from "../services/serviceService.js";
+import { addServiceToCar } from "../services/carService.js";
 import { checkAuth } from "../utils/session.js";
 
 let cars = [];
+let carId;
 let services = [];
 const rowsPerPage = 8;
 let currentPage = 1;
@@ -23,14 +25,18 @@ const getAllServices = async () =>{
     }
 }
 
-const updateCarDetails = async () =>{
-    let form = document.getElementById('updateForm');
-    updated = 
-    await updateCar(car.id,updated);
-    updated = {};
-    form.reset();
+const assignServicesToCar = async (carId) => {
+    const selectedServices = [];
+    document.querySelectorAll('.form-check-input:checked').forEach((checkbox) => {
+        selectedServices.push(checkbox.value);
+    });
+    try {
+        await addServiceToCar(carId,selectedServices)
+    } catch (err) {
+        console.error('Error al asignar servicios:', err);
+    }
     await loadContent();
-}
+};
 
 const loadTable = async (page) => {
     await getSoldCars();
@@ -55,7 +61,6 @@ const loadTable = async (page) => {
     tbody.innerHTML = content;
     tbody.addEventListener('click', (event) => {
         const addServiceButton = event.target.closest('button[id^="addServiceToCar-"]');
-        let carId;
         if (addServiceButton) {
             carId = addServiceButton.id.split('-')[1];
             loadServices(); 
@@ -101,36 +106,17 @@ const loadContent = async () => {
     renderPagination();
 }
 
-/*function registerEventListeners() {
-    document.getElementById("saveForm").addEventListener('submit', async (e) => {
+function registerEventListeners() {
+    document.getElementById("addServicesForm").addEventListener('submit', async (e) => {
         e.preventDefault();
-        await createCar();
+        await assignServicesToCar(carId);
     });
-
-    document.getElementById("saveBrandForm").addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await createBrand();
-        await loadSelectData(findAllBrands, "brands", true);
-    });
-
-    document.getElementById("updateForm").addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await updateCarDetails();
-    });
-
-    document.getElementById("confirmDeleteCar").addEventListener('click', async () => {
-        await removeCar(car.id);
-    });
-
-    document.getElementById("btnAddCar").addEventListener('click', async () => {
-        await loadSelectData(findAllBrands, "brands", true);
-    });
-}*/
+}
 
 
 (async ()=>{
     const requestedRoles = ["ROLE_EMPLOYEE"];
     const rol = checkAuth(requestedRoles);
     await loadContent();
-    //registerEventListeners();
+    registerEventListeners();
 })()
