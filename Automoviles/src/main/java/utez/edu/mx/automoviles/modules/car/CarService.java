@@ -154,27 +154,33 @@ public class CarService {
             return customResponseEntity.get404Response();
         }
         try {
-            List<utez.edu.mx.automoviles.modules.service.Service> services = new ArrayList<>();
+            List<utez.edu.mx.automoviles.modules.service.Service> existingServices = car.getServices();
+            List<utez.edu.mx.automoviles.modules.service.Service> newServices = new ArrayList<>();
+
             for (int serviceId : serviceIds) {
                 utez.edu.mx.automoviles.modules.service.Service service = serviceRepository.findById(serviceId);
-                if (service != null) {
-                    services.add(service);
+                if (service != null) { // Evita duplicados
+                    newServices.add(service);
                 }
             }
-            car.setServices(services);
-            double  servicesPrice = 0;
-            for (utez.edu.mx.automoviles.modules.service.Service service : services) {
-                servicesPrice += service.getPrice();
-            }
-            car.setPrice(servicesPrice + car.getPrice());
+
+            existingServices.addAll(newServices); // Agrega los nuevos servicios a la lista existente
+            car.setServices(existingServices);
+
+            // Actualizar el precio total del carro
+            double additionalPrice = newServices.stream()
+                    .mapToDouble(utez.edu.mx.automoviles.modules.service.Service::getPrice)
+                    .sum();
+            car.setPrice(car.getPrice() + additionalPrice);
+
             carRepository.save(car);
             return customResponseEntity.getOkResponse("Services added successfully", "OK", 200, null);
         } catch (Exception e) {
-            e.getMessage();
             e.printStackTrace();
             return customResponseEntity.get400Response();
         }
     }
+
 
 
     @Transactional(rollbackFor = {Exception.class, SQLException.class})

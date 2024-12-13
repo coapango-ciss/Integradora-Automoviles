@@ -25,28 +25,53 @@ const getBrandById = async (id) =>{
     }
 }
 
-const createBrand = async () =>{
+const createBrand = async () => {
     let form = document.getElementById('saveForm');
-    brand = {
-        name: document.getElementById('name').value
-        
-    }
-    await saveBrand(brand);
-    brand = {};
-    form.reset();
-    await loadContent();
-}
+    const nameInput = document.getElementById('name');
+    const name = nameInput.value.trim();
 
-const updateBrandDetails = async () =>{
-    let form = document.getElementById('updateForm');
-    updated = {
-        name: document.getElementById('u_name').value
+    if (!name) {
+        alert("El nombre de la marca es obligatorio.");
+        return;
     }
-    await updateBrand(brand.id,updated);
-    updated = {};
-    form.reset();
-    await loadContent();
-}
+
+    brand = { name };
+    
+    try {
+        await saveBrand(brand);
+        brand = {};
+        form.reset();
+        await loadContent();
+        alert("Marca creada exitosamente.");
+    } catch (error) {
+        console.error("Error al crear la marca:", error);
+        alert("Hubo un error al guardar la marca. Por favor, inténtalo nuevamente.");
+    }
+};
+
+const updateBrandDetails = async () => {
+    let form = document.getElementById('updateForm');
+    const nameInput = document.getElementById('u_name');
+    const name = nameInput.value.trim();
+
+    if (!name) {
+        alert("El nombre de la marca es obligatorio.");
+        return;
+    }
+    
+    updated = { name };
+    try {
+        await updateBrand(brand.id, updated);
+        updated = {};
+        form.reset();
+        await loadContent();
+        alert("Marca actualizada exitosamente.");
+    } catch (error) {
+        console.error("Error al actualizar la marca:", error);
+        alert("Hubo un error al actualizar la marca. Por favor, inténtalo nuevamente.");
+    }
+};
+
 
 const removeBrand = async (id) =>{
     await deleteBrand(id);

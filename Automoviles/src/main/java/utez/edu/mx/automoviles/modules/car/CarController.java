@@ -35,7 +35,7 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN","ROLE_EMPLOYEE"})
     public ResponseEntity<?> findById(@PathVariable long id) {
         return carService.findById(id);
     }
@@ -60,8 +60,8 @@ public class CarController {
 
     @PutMapping("/services/{id}")
     @Secured("ROLE_EMPLOYEE")
-    public ResponseEntity<?> addServicesToCar(@PathVariable long id,@RequestBody List<Integer> serviceIdS) {
-        return carService.addServicesToCar(id ,serviceIdS);
+    public ResponseEntity<?> addServicesToCar(@PathVariable long id,@RequestBody List<Integer> serviceIds) {
+        return carService.addServicesToCar(id ,serviceIds);
     }
 
     @DeleteMapping("/{id}")
