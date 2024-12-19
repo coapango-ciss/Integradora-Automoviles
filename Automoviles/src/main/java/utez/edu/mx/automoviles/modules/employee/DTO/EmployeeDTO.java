@@ -4,12 +4,14 @@ import utez.edu.mx.automoviles.modules.rol.Rol;
 
 public class EmployeeDTO {
 
-    /* Atributos visibles */
     long id;
-    private String name, surname, lastname, username;
+    private String name;
+    private String surname;
+    private String lastname;
+    private String username;
     private Rol rol;
 
-    /* Constructores */
+
     public EmployeeDTO(){
     };
 

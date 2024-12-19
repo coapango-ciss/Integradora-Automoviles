@@ -11,7 +11,6 @@ import utez.edu.mx.automoviles.modules.employee.EmployeeRepository;
 
 import java.util.Collections;
 
-// 5.- Crear UserDetailsService para el manejo de autorizaciones
 @Service
 public class EmployeeDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
     @Autowired
@@ -19,12 +18,10 @@ public class EmployeeDetailsService implements org.springframework.security.core
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Buscar el usuario por nombre de usuario
         Employee employee = employeeRepository.findByUsername(username);
         if(employee == null) {
             throw new UsernameNotFoundException("Usuario no encontrado: " + username);
         }
-        //Convertir el rol a GrantedAuthority
         GrantedAuthority authority = new SimpleGrantedAuthority(employee.getRol().getName());
 
         return new org.springframework.security.core.userdetails.User(

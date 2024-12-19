@@ -2,6 +2,7 @@ import { loadNavbar } from "./nav.js";
 
 export function logout() {
     localStorage.removeItem("auth_token");
+    localStorage.removeItem("rol");
     window.location.href = "../index.html";
 }
 
@@ -11,7 +12,7 @@ export async function checkAuth(requestedRoles) {
         await loadNavbar(rol);
     }else{
         alert("acceso denegado");
-        await logout();
+        logout();
         window.location.href = "../index.html";
     }
 }

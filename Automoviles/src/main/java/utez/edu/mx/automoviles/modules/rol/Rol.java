@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "rol")
 public class Rol {
 
-    /* Atributos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,12 +18,10 @@ public class Rol {
     @Column(name = "name", nullable = false)
     private String name;
 
-    /* Relaciones */
     @OneToMany(mappedBy = "rol")
     @JsonIgnore
     List<Employee> employees;
 
-    /* Constructores */
     public Rol() {}
 
     public Rol(String name) {
@@ -46,8 +43,6 @@ public class Rol {
         this.name = name;
         this.employees = employees;
     }
-
-    /* Getters & Setters */
 
     public int getId() {
         return id;

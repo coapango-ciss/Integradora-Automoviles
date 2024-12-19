@@ -17,21 +17,30 @@ const login = async () =>{
         rol = decoded.rol.toString();
         localStorage.setItem("rol", rol)
     }
-    if(rol === "ROLE_ADMIN"){
-        window.location.href = "../src/view/cars.html";
-    }else{
-        window.location.href = "../src/view/selling.html";
-    }
-    console.log(localStorage.getItem("rol"));
+    checkSession()
 }
 
-
+const checkSession = async() =>{
+    const rol = localStorage.getItem("rol");
+    if(rol === "ROLE_ADMIN"){
+        window.location.href = "../src/view/cars.html";
+        return true
+    }else if(rol === "ROLE_EMPLOYEE"){
+        window.location.href = "../src/view/selling.html";
+        return true;
+    }else return false;
+}
 
 (async()=>{
-    const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener('submit',(e)=>{
-        e.preventDefault();
-        login();
-    })
+    console.log(!localStorage.getItem("auth_token"));
+    if(!localStorage.getItem("auth_token")){
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            login();
+        })
+    }else{
+        checkSession();
+    }
 })()
 

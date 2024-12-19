@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "brand")
 public class Brand {
 
-    /* Atributos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,12 +18,10 @@ public class Brand {
     @Column(name = "name", nullable = false)
     private String name;
 
-    /* Relaciones */
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
     List<Car> cars;
 
-    /* Constructores */
     public Brand() {}
 
     public Brand(String name) {
@@ -46,8 +43,6 @@ public class Brand {
         this.name = name;
         this.cars = cars;
     }
-
-    /* Getters & Setters */
 
     public int getId() {
         return id;

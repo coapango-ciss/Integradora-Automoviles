@@ -5,7 +5,11 @@ import utez.edu.mx.automoviles.modules.employee.Employee;
 public class CustomerDTO {
 
     private long id;
-    private String name,surname,lastname,telephoneNumber,email;
+    private String name;
+    private String surname;
+    private String lastname;
+    private String telephoneNumber;
+    private String email;
     private Employee employee;
 
     private CustomerDTO(){}

@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "service")
 public class Service {
 
-    /* Atributos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,12 +27,10 @@ public class Service {
     @Column(name = "price", nullable = false)
     private double price;
 
-    /* Relaciones */
     @ManyToMany(mappedBy = "services")
     @JsonIgnore
     private List<Car> cars;
 
-    /* Constructores */
     public Service() {}
 
     public Service(String code, String name, String description, double price) {

@@ -6,7 +6,7 @@ import utez.edu.mx.automoviles.modules.rol.Rol;
 @Entity
 @Table(name = "employee")
 public class Employee {
-    /* Atributos */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,13 +27,10 @@ public class Employee {
     @Column(name = "password", nullable = false)
     private String password;
 
-    /* Relaciones */
-
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
 
-    /* Contructores */
     public Employee() {}
 
     public Employee(String name, String surname, String lastname, String username, String password) {
@@ -71,9 +68,6 @@ public class Employee {
         this.password = password;
         this.rol = rol;
     }
-
-
-    /* Getters & Setters */
 
     public Long getId() {
         return id;

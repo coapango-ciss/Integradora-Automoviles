@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer {
 
-    /* Atributos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -32,7 +31,6 @@ public class Customer {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    /* Relaciones */
     @ManyToOne
     @JoinColumn(name = "id_employee")
     private Employee employee;
@@ -40,8 +38,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     List<Car> cars;
-
-    /* Constructores */
 
     public Customer() {}
 

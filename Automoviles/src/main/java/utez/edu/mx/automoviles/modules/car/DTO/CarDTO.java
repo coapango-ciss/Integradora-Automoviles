@@ -1,5 +1,4 @@
 package utez.edu.mx.automoviles.modules.car.DTO;
-
 import utez.edu.mx.automoviles.modules.brand.Brand;
 import utez.edu.mx.automoviles.modules.customer.Customer;
 import utez.edu.mx.automoviles.modules.service.Service;
@@ -8,7 +7,10 @@ import java.util.List;
 
 public class CarDTO {
     private long id;
-    private String model, color, registerDate, sellDate;
+    private String model;
+    private String color;
+    private String registerDate;
+    private String sellDate;
     private double price;
     private Brand brand ;
     private boolean status;

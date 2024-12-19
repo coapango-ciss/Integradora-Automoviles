@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "car")
 public class Car {
 
-    /* Atributos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,7 +34,6 @@ public class Car {
     @Column(name = "sell_date")
     private String sellDate;
 
-    /* Relaciones */
     @ManyToOne
     @JoinColumn(name = "id_brand", nullable = false)
     private Brand brand;
@@ -52,7 +50,6 @@ public class Car {
     )
     private List<Service> services;
 
-    /* Constructores */
     public Car() {
     }
 

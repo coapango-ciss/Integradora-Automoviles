@@ -2,7 +2,9 @@ package utez.edu.mx.automoviles.modules.service.DTO;
 
 public class ServiceDTO {
     private int id;
-    private String code, name, description;
+    private String code;
+    private String name;
+    private String description;
     private double price;
 
     public ServiceDTO() {
